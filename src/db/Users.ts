@@ -37,3 +37,28 @@ export async function signUp(
 
   return model;
 }
+
+/*
+{
+  name: "authenticate-user",
+  role: "server",
+  body: Query(
+    Lambda(
+      ["username", "password"],
+      Login(Match(Index("users_by_username"), Var("username")), {
+        password: Var("password")
+      })
+    )
+  )
+}
+*/
+export async function signIn(
+  username: string,
+  password: string
+): Promise<string> {
+  const { secret } = await client.query<{ secret: string }>(
+    q.Call("authenticate-user", [username, password])
+  );
+
+  return secret;
+}

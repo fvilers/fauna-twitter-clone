@@ -1,15 +1,44 @@
-import React from "react";
-import SignInForm from "../components/SignInForm";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import SignInForm, { SignInFormValues } from "../components/SignInForm";
+import { signIn } from "../db/Users";
+import AsyncOperation from "../types/AsyncOperation";
 
 type Props = {
   username?: string;
 };
 
 function SignIn({ username }: Props) {
-  // TODO: handle sign in
-  const handleSignIn = () => {};
+  const [{ busy, errorMessage }, setOperation] = useState<AsyncOperation>({
+    busy: false,
+  });
+  const history = useHistory();
+  const handleSignIn = async ({ username, password }: SignInFormValues) => {
+    setOperation({ busy: true, errorMessage: undefined });
 
-  return <SignInForm onSubmit={handleSignIn} />;
+    try {
+      const secret = await signIn(username, password);
+      // TODO: save secret
+      console.log(secret);
+      setOperation({ busy: false });
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+      setOperation({
+        busy: false,
+        errorMessage: error.description || error.message,
+      });
+    }
+  };
+
+  return (
+    <SignInForm
+      defaultValues={{ username }}
+      disabled={busy}
+      errorMessage={errorMessage}
+      onSubmit={handleSignIn}
+    />
+  );
 }
 
 export default SignIn;
