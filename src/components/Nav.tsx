@@ -16,6 +16,11 @@ function Nav() {
             404 page
           </NavLink>
         </li>
+        <li>
+          <NavLink activeClassName="active" exact to="/sign-up">
+            Sign up
+          </NavLink>
+        </li>
       </ul>
     </div>
   );
