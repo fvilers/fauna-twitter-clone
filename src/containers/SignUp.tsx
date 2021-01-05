@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import SignUpForm from "../components/SignUpForm";
 
 function SignUp() {
   // TODO: handle sign up
-  return <div></div>;
+  const [busy, setBusy] = useState(false);
+  const handleSignUp = () => {
+    setBusy(true);
+  };
+
+  return <SignUpForm disabled={busy} onSubmit={handleSignUp} />;
 }
 
 export default SignUp;
