@@ -1,0 +1,37 @@
+.Button.default {
+  background-color: var(--background-color);
+  border: 1px solid var(--foreground-color);
+  color: var(--foreground-color);
+}
+
+.Button.error {
+  background-color: var(--error-color);
+  border: 1px solid var(--error-color);
+  color: var(--background-color);
+}
+
+.Button.primary {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--background-color);
+}
+
+.Button.success {
+  background-color: var(--success-color);
+  border: 1px solid var(--success-color);
+  color: var(--background-color);
+}
+
+.Button.warning {
+  background-color: var(--warning-color);
+  border: 1px solid var(--warning-color);
+  color: var(--background-color);
+}
+
+.Button.link {
+  background-color: transparent;
+  border: 0;
+  color: var(--primary-color);
+  display: inline;
+  padding: 0;
+}

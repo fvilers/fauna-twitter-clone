@@ -3,6 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import FormProps from "../types/FormProps";
+import Button from "./Button";
 import Input from "./Input";
 import Message from "./Message";
 
@@ -48,9 +49,9 @@ function SignUpForm({ disabled, errorMessage, onSubmit }: Props) {
       {errorMessage && <Message variant="error">{errorMessage}</Message>}
 
       <div>
-        <button disabled={disabled} type="submit">
+        <Button disabled={disabled} type="submit" variant="primary">
           Sign up
-        </button>
+        </Button>
       </div>
     </form>
   );
