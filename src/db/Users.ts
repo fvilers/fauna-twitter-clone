@@ -26,7 +26,7 @@ export async function signUp(
   username: string,
   password: string
 ): Promise<UserModel> {
-  const { data, ref } = await client.query<{ data: UserData; ref: values.Ref }>(
+  const { data, ref } = await client.query<values.Document<UserData>>(
     q.Call("create-user", [username, password])
   );
   const model: UserModel = {

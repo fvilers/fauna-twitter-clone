@@ -41,7 +41,6 @@ function TweetForm(
     <form className="TweetForm" noValidate onSubmit={handleSubmit(onSubmit)}>
       <fieldset disabled={disabled}>
         <Textarea
-          error={errors.tweet}
           id="tweet"
           placeholder="What's happening?"
           rows={2}
