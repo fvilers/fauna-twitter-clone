@@ -1,4 +1,5 @@
 import React from "react";
+import SignInForm from "../components/SignInForm";
 
 type Props = {
   username?: string;
@@ -6,7 +7,9 @@ type Props = {
 
 function SignIn({ username }: Props) {
   // TODO: handle sign in
-  return <div></div>;
+  const handleSignIn = () => {};
+
+  return <SignInForm onSubmit={handleSignIn} />;
 }
 
 export default SignIn;
