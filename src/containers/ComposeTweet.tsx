@@ -1,8 +1,11 @@
 import React from "react";
+import TweetForm from "../components/TweetForm";
 
 function ComposeTweet() {
   // TODO: handle send tweet
-  return <div></div>;
+  const handleSendTweet = () => {};
+
+  return <TweetForm onSubmit={handleSendTweet} />;
 }
 
 export default ComposeTweet;

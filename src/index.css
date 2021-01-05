@@ -50,11 +50,16 @@ fieldset {
 }
 
 button,
-input {
+input,
+textarea {
   font-family: var(--font-family);
   font-size: 1rem;
   line-height: 1.5;
   padding: 0.375rem 0.75rem;
+}
+
+textarea {
+  resize: none;
 }
 
 button:disabled {
