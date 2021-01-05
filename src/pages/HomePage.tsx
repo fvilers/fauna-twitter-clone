@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Nav from "../components/Nav";
 import ComposeTweet from "../containers/ComposeTweet";
+import Timeline from "../containers/Timeline";
 import AuthContext from "../contexts/AuthContext";
 
 function HomePage() {
@@ -9,7 +10,12 @@ function HomePage() {
     <div>
       <h1>Twitter clone</h1>
       <Nav />
-      {hasSecret() && <ComposeTweet />}
+      {hasSecret() && (
+        <>
+          <ComposeTweet />
+          <Timeline />
+        </>
+      )}
     </div>
   );
 }
