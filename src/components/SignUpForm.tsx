@@ -3,6 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import FormProps from "../types/FormProps";
+import Input from "./Input";
 
 export type SignUpFormValues = {
   username: string;
@@ -24,29 +25,23 @@ function SignUpForm({ disabled, errorMessage, onSubmit }: Props) {
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <fieldset disabled={disabled}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            autoComplete="username"
-            autoFocus
-            id="username"
-            name="username"
-            ref={register}
-          />
-          {errors.username && <span>{errors.username?.message}</span>}
-        </div>
+        <Input
+          autoComplete="username"
+          autoFocus
+          error={errors.username}
+          id="username"
+          inputRef={register}
+          label="Username"
+        />
 
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            autoComplete="new-password"
-            id="password"
-            name="password"
-            ref={register}
-            type="password"
-          />
-          {errors.password && <span>{errors.password?.message}</span>}
-        </div>
+        <Input
+          autoComplete="new-password"
+          error={errors.password}
+          id="password"
+          inputRef={register}
+          label="Password"
+          type="password"
+        />
       </fieldset>
 
       {errorMessage && <div>{errorMessage}</div>}

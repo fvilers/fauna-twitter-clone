@@ -1,0 +1,15 @@
+.Input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.Input label,
+.Input .error {
+  margin-bottom: 0.25rem;
+}
+
+.Input .error {
+  color: var(--error-color);
+  margin-top: 0.5rem;
+}
