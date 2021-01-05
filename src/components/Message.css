@@ -1,0 +1,36 @@
+.Message {
+  background-color: var(--foreground-color);
+  background-image: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  border: 1px solid var(--foreground-color);
+  color: var(--foreground-color);
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.Message.error {
+  background-color: var(--error-color);
+  border: 1px solid var(--error-color);
+  color: var(--error-color);
+}
+
+.Message.primary {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.Message.success {
+  background-color: var(--success-color);
+  border: 1px solid var(--success-color);
+  color: var(--success-color);
+}
+
+.Message.warning {
+  background-color: var(--warning-color);
+  border: 1px solid var(--warning-color);
+  color: var(--warning-color);
+}

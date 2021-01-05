@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import FormProps from "../types/FormProps";
 import Input from "./Input";
+import Message from "./Message";
 
 export type SignUpFormValues = {
   username: string;
@@ -44,7 +45,7 @@ function SignUpForm({ disabled, errorMessage, onSubmit }: Props) {
         />
       </fieldset>
 
-      {errorMessage && <div>{errorMessage}</div>}
+      {errorMessage && <Message variant="error">{errorMessage}</Message>}
 
       <div>
         <button disabled={disabled} type="submit">

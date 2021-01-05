@@ -8,7 +8,13 @@ function SignUp() {
     setBusy(true);
   };
 
-  return <SignUpForm disabled={busy} onSubmit={handleSignUp} />;
+  return (
+    <SignUpForm
+      disabled={busy}
+      errorMessage="An error has occurred"
+      onSubmit={handleSignUp}
+    />
+  );
 }
 
 export default SignUp;

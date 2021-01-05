@@ -6,5 +6,5 @@
     "**/yarn.lock": true
   },
   "css.lint.unknownAtRules": "ignore",
-  "cSpell.words": ["hookform"]
+  "cSpell.words": ["clsx", "hookform"]
 }
