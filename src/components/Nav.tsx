@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import SignOut from "../containers/SignOut";
 import AuthContext from "../contexts/AuthContext";
-import Button from "./Button";
 import "./Nav.css";
 
 function Nav() {
@@ -18,7 +18,7 @@ function Nav() {
         {hasSecret() ? (
           <>
             <li>
-              <Button variant="link">Sign out</Button>
+              <SignOut />
             </li>
           </>
         ) : (

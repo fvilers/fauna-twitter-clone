@@ -62,3 +62,9 @@ export async function signIn(
 
   return secret;
 }
+
+export async function signOut(secret: string): Promise<boolean> {
+  const result = await client.query<boolean>(q.Logout(true), { secret });
+
+  return result;
+}
