@@ -17,6 +17,11 @@ function Nav() {
           </NavLink>
         </li>
         <li>
+          <NavLink activeClassName="active" exact to="/sign-in">
+            Sign in
+          </NavLink>
+        </li>
+        <li>
           <NavLink activeClassName="active" exact to="/sign-up">
             Sign up
           </NavLink>
