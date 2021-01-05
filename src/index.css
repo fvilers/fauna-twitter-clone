@@ -1,0 +1,28 @@
+@import-normalize;
+
+:root {
+  --background-color: #fff;
+  --font-family: sans-serif;
+  --foreground-color: #111827;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  font-family: var(--font-family);
+  line-height: 1.5;
+  margin: 0;
+}
+
+#root {
+  padding: 1rem;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+p {
+  margin: 0;
+}

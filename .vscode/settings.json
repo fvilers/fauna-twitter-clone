@@ -4,5 +4,6 @@
     "**/node_modules": true,
     "**/.eslintcache": true,
     "**/yarn.lock": true
-  }
+  },
+  "css.lint.unknownAtRules": "ignore"
 }
