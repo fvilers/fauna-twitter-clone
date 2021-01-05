@@ -1,0 +1,19 @@
+.Textarea {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.Textarea label,
+.Textarea .error {
+  margin-bottom: 0.25rem;
+}
+
+.Textarea .error {
+  color: var(--error-color);
+  margin-top: 0.5rem;
+}
+
+.Textarea textarea {
+  resize: none;
+}
