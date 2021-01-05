@@ -1,0 +1,21 @@
+.Nav {
+  margin-bottom: 1rem;
+}
+
+.Nav li {
+  display: inline-block;
+}
+
+.Nav li:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.Nav li:not(:last-child)::after {
+  content: "";
+  border-right: 1px solid var(--muted-color);
+  margin-left: 0.5rem;
+}
+
+.Nav a.active {
+  color: var(--muted-color);
+}
