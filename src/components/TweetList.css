@@ -1,0 +1,12 @@
+.TweetList li {
+  margin: 0.5rem 0;
+  padding-bottom: 0.5rem;
+}
+
+.TweetList li:not(:last-child) {
+  border-bottom: 1px solid var(--muted-color);
+}
+
+.TweetList small {
+  color: var(--muted-color);
+}

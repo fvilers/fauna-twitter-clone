@@ -12,8 +12,13 @@ function HomePage() {
       <Nav />
       {hasSecret() && (
         <>
-          <ComposeTweet />
-          <Timeline />
+          <section>
+            <ComposeTweet />
+          </section>
+          <section>
+            <h2>Latest Tweets</h2>
+            <Timeline />
+          </section>
         </>
       )}
     </div>
