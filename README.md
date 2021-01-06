@@ -1,6 +1,21 @@
-# Getting Started with Create React App
+# fauna-twitter-clone
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Goal
+
+The main goal of this project was to setup a playground to learn how to use and develop apps with [Fauna](https://fauna.com/). The design of the application has been deliberately kept simplistic and mobile first.
+
+## Application structure
+
+- components: dumb components, mainly oriented for data display and data input
+- containers: smart components, only oriented for data creating or fetching
+- contexts: application contexts (redux is not used for this application)
+- db: fauna query helpers
+- hooks: react hooks
+- models: data model used of the application
+- pages: application pages used by the router
+- types: types that does not represent the application model but are useful at different places
 
 ## Available Scripts
 
