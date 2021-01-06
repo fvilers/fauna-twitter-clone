@@ -1,5 +1,6 @@
 import assert from "assert";
 import React, { useContext, useEffect, useState } from "react";
+import Loading from "../components/Loading";
 import Message from "../components/Message";
 import TweetList from "../components/TweetList";
 import AuthContext from "../contexts/AuthContext";
@@ -41,7 +42,7 @@ function Timeline() {
   }, [secret]);
 
   if (busy) {
-    return <div>Loading...</div>;
+    return <Loading message="Loading timeline..." />;
   }
 
   if (errorMessage) {

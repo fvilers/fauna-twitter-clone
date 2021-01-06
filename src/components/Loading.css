@@ -1,0 +1,7 @@
+.Loading {
+  display: flex;
+}
+
+.Loading progress {
+  flex: 1;
+}
