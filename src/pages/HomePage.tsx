@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import Greeting from "../components/Greeting";
 import Nav from "../components/Nav";
 import ComposeTweet from "../containers/ComposeTweet";
 import Timeline from "../containers/Timeline";
@@ -12,6 +13,9 @@ function HomePage() {
       <Nav />
       {hasSecret() && (
         <TimelineProvider>
+          <section>
+            <Greeting />
+          </section>
           <section>
             <ComposeTweet />
           </section>
