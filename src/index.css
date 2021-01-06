@@ -75,3 +75,11 @@ section {
 footer {
   margin-top: 2rem;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex.right {
+  justify-content: flex-end;
+}

@@ -50,7 +50,7 @@ function TweetForm(
 
       {errorMessage && <Message variant="error">{errorMessage}</Message>}
 
-      <div>
+      <div className="flex right">
         <Button disabled={!canSubmit} type="submit" variant="primary">
           Tweet
         </Button>
