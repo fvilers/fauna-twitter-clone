@@ -5,6 +5,7 @@ import TweetForm, {
   TweetFormValues,
 } from "../components/TweetForm";
 import AuthContext from "../contexts/AuthContext";
+import TimelineContext from "../contexts/TimelineContext";
 import { composeTweet } from "../db/Tweets";
 import AsyncOperation from "../types/AsyncOperation";
 
@@ -13,6 +14,7 @@ function ComposeTweet() {
     busy: false,
   });
   const { secret } = useContext(AuthContext);
+  const { addTweet } = useContext(TimelineContext);
   const ref = useRef<TweetFormHandles>(null);
   const handleSendTweet = async ({ tweet }: TweetFormValues) => {
     assert(secret);
@@ -21,8 +23,7 @@ function ComposeTweet() {
 
     try {
       const model = await composeTweet(tweet, secret);
-      // TODO: add to the timeline
-      console.log(model);
+      addTweet(model);
       ref.current.reset();
       setOperation({ busy: false });
     } catch (error) {
