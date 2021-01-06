@@ -105,3 +105,46 @@ export async function getTimeline(secret: string): Promise<TweetModel[]> {
 
   return model;
 }
+
+/*
+{
+  name: "get-user-tweets",
+  role: "server",
+  body: Query(
+    Lambda(
+      "username",
+      Map(
+        Paginate(
+          Join(
+            Match(Index("users_by_username"), Var("username")),
+            Index("tweets_by_userRef")
+          )
+        ),
+        Lambda(
+          "item",
+          Let(
+            { tweet: Get(Select([1], Var("item"))) },
+            {
+              author: Get(Select(["data", "userRef"], Var("tweet"))),
+              tweet: Var("tweet")
+            }
+          )
+        )
+      )
+    )
+  )
+}
+*/
+export async function getUserTweets(username: string): Promise<TweetModel[]> {
+  const { data } = await client.query<
+    values.Document<
+      {
+        author: values.Document<UserData>;
+        tweet: values.Document<TweetData>;
+      }[]
+    >
+  >(q.Call("get-user-tweets", username));
+  const model = data.map(({ author, tweet }) => mapTweet(author, tweet));
+
+  return model;
+}
