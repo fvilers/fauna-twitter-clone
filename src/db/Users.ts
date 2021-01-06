@@ -2,6 +2,36 @@ import { query as q, values } from "faunadb";
 import UserModel from "../models/UserModel";
 import client from "./Client";
 
+/*
+{
+  name: "users_by_username",
+  unique: true,
+  serialized: true,
+  source: "users",
+  terms: [
+    {
+      field: ["data", "username"]
+    }
+  ]
+}
+
+{
+  name: "following_by_followers",
+  unique: false,
+  serialized: true,
+  source: "followers",
+  terms: [
+    {
+      field: ["data", "follower"]
+    }
+  ],
+  values: [
+    {
+      field: ["data", "following"]
+    }
+  ]
+}
+*/
 export type UserData = {
   createdAt: values.FaunaTime;
   username: string;

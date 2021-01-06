@@ -3,10 +3,32 @@ import TweetModel from "../models/TweetModel";
 import client from "./Client";
 import { UserData } from "./Users";
 
+/*
+{
+  name: "tweets_by_author",
+  unique: false,
+  serialized: true,
+  source: "tweets",
+  terms: [
+    {
+      field: ["data", "author"]
+    }
+  ],
+  values: [
+    {
+      field: ["data", "createdAt"],
+      reverse: true
+    },
+    {
+      field: ["ref"]
+    }
+  ]
+}
+*/
 export type TweetData = {
+  author: values.Ref;
   createdAt: values.FaunaTime;
   tweet: string;
-  userRef: values.Ref;
 };
 
 function mapTweet(
@@ -27,19 +49,19 @@ function mapTweet(
   role: "server",
   body: Query(
     Lambda(
-      ["text"],
+      "text",
       Let(
         {
           tweet: Create(Collection("tweets"), {
             data: {
+              author: CurrentIdentity(),
               createdAt: Now(),
-              tweet: Var("text"),
-              userRef: CurrentIdentity()
+              tweet: Var("text")
             }
           })
         },
         {
-          author: Get(Select(["data", "userRef"], Var("tweet"))),
+          author: Get(Select(["data", "author"], Var("tweet"))),
           tweet: Var("tweet")
         }
       )
@@ -54,7 +76,7 @@ export async function composeTweet(
   const { author, tweet } = await client.query<{
     author: values.Document<UserData>;
     tweet: values.Document<TweetData>;
-  }>(q.Call("create-tweet", [text]), { secret });
+  }>(q.Call("create-tweet", text), { secret });
   const model = mapTweet(author, tweet);
 
   return model;
@@ -72,9 +94,9 @@ export async function composeTweet(
           Union(
             Join(
               Match(Index("following_by_followers"), Var("identity")),
-              Index("tweets_by_userRef")
+              Index("tweets_by_author")
             ),
-            Match(Index("tweets_by_userRef"), Var("identity"))
+            Match(Index("tweets_by_author"), Var("identity"))
           )
         ),
         Lambda(
@@ -82,7 +104,7 @@ export async function composeTweet(
           Let(
             { tweet: Get(Select([1], Var("item"))) },
             {
-              author: Get(Select(["data", "userRef"], Var("tweet"))),
+              author: Get(Select(["data", "author"], Var("tweet"))),
               tweet: Var("tweet")
             }
           )
@@ -117,7 +139,7 @@ export async function getTimeline(secret: string): Promise<TweetModel[]> {
         Paginate(
           Join(
             Match(Index("users_by_username"), Var("username")),
-            Index("tweets_by_userRef")
+            Index("tweets_by_author")
           )
         ),
         Lambda(
@@ -125,7 +147,7 @@ export async function getTimeline(secret: string): Promise<TweetModel[]> {
           Let(
             { tweet: Get(Select([1], Var("item"))) },
             {
-              author: Get(Select(["data", "userRef"], Var("tweet"))),
+              author: Get(Select(["data", "author"], Var("tweet"))),
               tweet: Var("tweet")
             }
           )
