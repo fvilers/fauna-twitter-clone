@@ -21,7 +21,6 @@ function SignIn({ username }: Props) {
     try {
       const secret = await signIn(username, password);
       saveSecret(secret);
-      console.log(secret);
       setOperation({ busy: false });
       history.push("/");
     } catch (error) {
