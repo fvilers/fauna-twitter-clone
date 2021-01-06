@@ -3,7 +3,7 @@
 :root {
   --background-color: #fff;
   --error-color: #ef4444;
-  --font-family: sans-serif;
+  --font-family: "Source Sans Pro", sans-serif;
   --foreground-color: #111827;
   --muted-color: #6b7280;
   --primary-color: #3b82f6;
