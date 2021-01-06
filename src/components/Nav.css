@@ -1,5 +1,17 @@
 .Nav {
-  margin-bottom: 1rem;
+  align-items: baseline;
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  display: flex;
+  justify-content: space-between;
+  margin: -1rem -1rem 1rem -1rem;
+  padding: 1rem;
+}
+
+.Nav h1 {
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin: 0;
 }
 
 .Nav li {
@@ -10,12 +22,16 @@
   margin-right: 0.5rem;
 }
 
-.Nav li:not(:last-child)::after {
-  content: "";
-  border-right: 1px solid var(--muted-color);
-  margin-left: 0.5rem;
+.Nav a {
+  color: var(--background-color);
+  padding: 0.5rem;
 }
 
-.Nav a.active {
-  color: var(--muted-color);
+.Nav a.outline {
+  border: 1px solid var(--background-color);
+  color: var(--background-color);
+}
+
+.Nav Button.link {
+  color: var(--background-color);
 }

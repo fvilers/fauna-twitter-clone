@@ -9,7 +9,6 @@ function HomePage() {
   const { hasSecret } = useContext(AuthContext);
   return (
     <div>
-      <h1>Twitter clone</h1>
       <Nav />
       {hasSecret() && (
         <TimelineProvider>
