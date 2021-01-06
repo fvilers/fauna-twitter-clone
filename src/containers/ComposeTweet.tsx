@@ -27,7 +27,7 @@ function ComposeTweet() {
       ref.current.reset();
       setOperation({ busy: false });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setOperation({
         busy: false,
         errorMessage: error.description || error.message,

@@ -24,7 +24,7 @@ function SignIn({ username }: Props) {
       setOperation({ busy: false });
       history.push("/");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setOperation({
         busy: false,
         errorMessage: error.description || error.message,

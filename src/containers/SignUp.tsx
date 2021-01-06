@@ -17,7 +17,7 @@ function SignUp() {
       setOperation({ busy: false });
       history.push("/sign-in", { username: user.username });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setOperation({
         busy: false,
         errorMessage: error.description || error.message,
