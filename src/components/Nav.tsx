@@ -9,7 +9,9 @@ function Nav() {
 
   return (
     <div className="Nav">
-      <h1>Twitter clone</h1>
+      <h1>
+        <Link to="/">Twitter clone</Link>
+      </h1>
       <nav>
         <ul>
           {hasSecret() ? (

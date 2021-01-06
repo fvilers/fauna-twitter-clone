@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import TweetModel from "../models/TweetModel";
 import FromNow from "./FromNow";
 import "./TweetList.css";
@@ -14,7 +15,8 @@ function TweetList({ items }: Props) {
         <li key={id}>
           <div>
             <small>
-              @{author} &bull; <FromNow date={+createdAt} />
+              <Link to={`/u/${author}`}>@{author}</Link> &bull;{" "}
+              <FromNow date={+createdAt} />
             </small>
           </div>
           <div>{tweet}</div>
