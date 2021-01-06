@@ -52,3 +52,54 @@ export async function composeTweet(
 
   return model;
 }
+
+/*
+{
+  name: "get-timeline",
+  role: "server",
+  body: Query(
+    Lambda(
+      "identity",
+      Map(
+        Paginate(
+          Union(
+            Join(
+              Match(Index("following_by_followers"), Var("identity")),
+              Index("tweets_by_userRef")
+            ),
+            Match(Index("tweets_by_userRef"), Var("identity"))
+          )
+        ),
+        Lambda(
+          "item",
+          Let(
+            { tweet: Get(Select([1], Var("item"))) },
+            {
+              author: Get(Select(["data", "userRef"], Var("tweet"))),
+              tweet: Var("tweet")
+            }
+          )
+        )
+      )
+    )
+  )
+}
+*/
+export async function getTimeline(secret: string): Promise<TweetModel[]> {
+  const { data } = await client.query<
+    values.Document<
+      {
+        author: values.Document<UserData>;
+        tweet: values.Document<TweetData>;
+      }[]
+    >
+  >(q.Call("get-timeline", q.CurrentIdentity()), { secret });
+  const model: TweetModel[] = data.map(({ author, tweet }) => ({
+    author: author.data.username,
+    createdAt: tweet.data.createdAt.date,
+    id: tweet.ref.id,
+    tweet: tweet.data.tweet,
+  }));
+
+  return model;
+}
