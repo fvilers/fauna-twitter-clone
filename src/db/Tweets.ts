@@ -9,6 +9,18 @@ export type TweetData = {
   userRef: values.Ref;
 };
 
+function mapTweet(
+  author: values.Document<UserData>,
+  tweet: values.Document<TweetData>
+): TweetModel {
+  return {
+    author: author.data.username,
+    createdAt: tweet.data.createdAt.date,
+    id: tweet.ref.id,
+    tweet: tweet.data.tweet,
+  };
+}
+
 /*
 {
   name: "create-tweet",
@@ -43,12 +55,7 @@ export async function composeTweet(
     author: values.Document<UserData>;
     tweet: values.Document<TweetData>;
   }>(q.Call("create-tweet", [text]), { secret });
-  const model: TweetModel = {
-    author: author.data.username,
-    createdAt: tweet.data.createdAt.date,
-    id: tweet.ref.id,
-    tweet: tweet.data.tweet,
-  };
+  const model = mapTweet(author, tweet);
 
   return model;
 }
@@ -94,12 +101,7 @@ export async function getTimeline(secret: string): Promise<TweetModel[]> {
       }[]
     >
   >(q.Call("get-timeline", q.CurrentIdentity()), { secret });
-  const model: TweetModel[] = data.map(({ author, tweet }) => ({
-    author: author.data.username,
-    createdAt: tweet.data.createdAt.date,
-    id: tweet.ref.id,
-    tweet: tweet.data.tweet,
-  }));
+  const model = data.map(({ author, tweet }) => mapTweet(author, tweet));
 
   return model;
 }
