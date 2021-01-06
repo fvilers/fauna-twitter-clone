@@ -6,13 +6,16 @@ import FormProps from "../types/FormProps";
 import Button from "./Button";
 import Message from "./Message";
 import Textarea from "./Textarea";
+import TweetCounter from "./TweetCounter";
 
 export type TweetFormValues = {
   tweet: string;
 };
 
+const MAX_TWEET_LENGTH = 280;
+
 const schema: yup.SchemaOf<TweetFormValues> = yup.object().shape({
-  tweet: yup.string().label("Tweet").required().max(280),
+  tweet: yup.string().label("Tweet").required().max(MAX_TWEET_LENGTH),
 });
 
 type Props = FormProps<TweetFormValues>;
@@ -25,10 +28,11 @@ function TweetForm(
   { disabled, errorMessage, onSubmit }: Props,
   ref: Ref<TweetFormHandles>
 ) {
-  const { handleSubmit, register, errors, setValue } = useForm({
+  const { handleSubmit, register, errors, setValue, watch } = useForm({
     mode: "onChange",
     resolver: yupResolver(schema),
   });
+  const tweet = watch("tweet") || "";
   const canSubmit = disabled !== true && errors.tweet === undefined;
 
   useImperativeHandle(ref, () => ({
@@ -51,6 +55,9 @@ function TweetForm(
       {errorMessage && <Message variant="error">{errorMessage}</Message>}
 
       <div className="flex right">
+        {tweet.length > MAX_TWEET_LENGTH / 2 && (
+          <TweetCounter length={tweet.length} max={MAX_TWEET_LENGTH} />
+        )}
         <Button disabled={!canSubmit} type="submit" variant="primary">
           Tweet
         </Button>
