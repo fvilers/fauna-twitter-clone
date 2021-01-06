@@ -1,5 +1,5 @@
 {
-  "name": "twitter-clone",
+  "name": "fauna-twitter-clone",
   "version": "0.0.0",
   "description": "A Twitter clone written in React and powered by Fauna",
   "private": true,
