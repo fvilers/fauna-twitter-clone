@@ -1,0 +1,5 @@
+.UserTitle {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+}

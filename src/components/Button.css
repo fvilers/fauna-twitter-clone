@@ -1,4 +1,4 @@
-.Button.default {
+.Button {
   background-color: var(--background-color);
   border: 1px solid var(--foreground-color);
   color: var(--foreground-color);

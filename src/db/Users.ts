@@ -14,6 +14,27 @@ import client from "./Client";
     }
   ]
 }
+*/
+export type UserData = {
+  createdAt: values.FaunaTime;
+  username: string;
+};
+
+/*
+{
+  name: "followers_unique",
+  unique: true,
+  serialized: true,
+  source: "followers",
+  terms: [
+    {
+      field: ["data", "follower"]
+    },
+    {
+      field: ["data", "following"]
+    }
+  ]
+}
 
 {
   name: "following_by_followers",
@@ -32,9 +53,10 @@ import client from "./Client";
   ]
 }
 */
-export type UserData = {
+type FollowData = {
   createdAt: values.FaunaTime;
-  username: string;
+  follower: values.Ref;
+  following: values.Ref;
 };
 
 /*
@@ -97,4 +119,100 @@ export async function signOut(secret: string): Promise<boolean> {
   const result = await client.query<boolean>(q.Logout(true), { secret });
 
   return result;
+}
+
+/*
+{
+  name: "is-following",
+  role: "server",
+  body: Query(
+    Lambda(
+      "username",
+      Let(
+        { user: Match(Index("users_by_username"), Var("username")) },
+        If(
+          Exists(Var("user")),
+          Let(
+            {
+              following: Match(Index("followers_unique"), [
+                CurrentIdentity(),
+                Select("ref", Get(Var("user")))
+              ])
+            },
+            Exists(Var("following"))
+          ),
+          false
+        )
+      )
+    )
+  )
+}
+*/
+export async function getIsFollowing(
+  username: string,
+  secret: string
+): Promise<boolean> {
+  const result = await client.query<boolean>(q.Call("is-following", username), {
+    secret,
+  });
+
+  return result;
+}
+
+/*
+Query(
+  Lambda(
+    "username",
+    Create(Collection("followers"), {
+      data: {
+        createdAt: Now(),
+        follower: CurrentIdentity(),
+        following: Select(
+          "ref",
+          Get(Match(Index("users_by_username"), Var("username")))
+        )
+      }
+    })
+  )
+)
+*/
+export async function followUser(
+  username: string,
+  secret: string
+): Promise<void> {
+  await client.query<values.Document<FollowData>>(
+    q.Call("follow-user", username),
+    { secret }
+  );
+}
+
+/*
+Query(
+  Lambda(
+    "username",
+    Delete(
+      Select(
+        "ref",
+        Get(
+          Match(Index("followers_unique"), [
+            CurrentIdentity(),
+            Select(
+              "ref",
+              Get(Match(Index("users_by_username"), Var("username")))
+            )
+          ])
+        )
+      )
+    )
+  )
+)
+*/
+export async function unfollowUser(
+  username: string,
+  secret: string
+): Promise<void> {
+  await client.query<values.Document<FollowData>>(
+    q.Call("unfollow-user", username),
+    { secret }
+  );
 }
