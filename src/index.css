@@ -76,6 +76,16 @@ footer {
   margin-top: 2rem;
 }
 
+dialog {
+  border: 1px solid var(--muted-color);
+  padding: 1rem;
+  width: 20rem;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(0.25rem);
+}
+
 .flex {
   display: flex;
 }
