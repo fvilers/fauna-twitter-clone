@@ -18,15 +18,16 @@ function getGreeting(when: Date): string {
 }
 
 type Props = {
+  username: string;
   when?: Date;
 };
 
-function Greeting({ when = new Date() }: Props) {
+function Greeting({ username, when = new Date() }: Props) {
   const greeting = getGreeting(when);
 
   return (
     <div>
-      {greeting}, <strong>fvilers</strong>
+      {greeting}, <strong>{username}</strong>
     </div>
   );
 }

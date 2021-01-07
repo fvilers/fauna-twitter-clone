@@ -20,6 +20,14 @@ export type UserData = {
   username: string;
 };
 
+function mapUser({ data, ref }: values.Document<UserData>): UserModel {
+  return {
+    createdAt: data.createdAt.date,
+    id: ref.id,
+    username: data.username,
+  };
+}
+
 /*
 {
   name: "followers_unique",
@@ -78,14 +86,10 @@ export async function signUp(
   username: string,
   password: string
 ): Promise<UserModel> {
-  const { data, ref } = await client.query<values.Document<UserData>>(
+  const doc = await client.query<values.Document<UserData>>(
     q.Call("create-user", [username, password])
   );
-  const model: UserModel = {
-    createdAt: data.createdAt.date,
-    id: ref.id,
-    username: data.username,
-  };
+  const model = mapUser(doc);
 
   return model;
 }
@@ -108,11 +112,29 @@ export async function signIn(
   username: string,
   password: string
 ): Promise<string> {
-  const { secret } = await client.query<{ secret: string }>(
-    q.Call("authenticate-user", [username, password])
-  );
+  const { secret } = await client.query<{
+    instance: values.Ref;
+    secret: string;
+  }>(q.Call("authenticate-user", [username, password]));
 
   return secret;
+}
+
+/*
+{
+  name: "get-current-user",
+  role: "server",
+  body: Query(Lambda([], Get(CurrentIdentity())))
+}
+*/
+export async function getCurrentUser(secret: string): Promise<UserModel> {
+  const doc = await client.query<values.Document<UserData>>(
+    q.Call("get-current-user"),
+    { secret }
+  );
+  const model = mapUser(doc);
+
+  return model;
 }
 
 export async function signOut(secret: string): Promise<boolean> {

@@ -22,7 +22,6 @@ function TimelineProvider({ children }: Props) {
   const addTweet = (tweet: TweetModel) => {
     setState((s) => ({ ...s, tweets: [tweet, ...s.tweets] }));
   };
-
   const { secret } = useContext(AuthContext);
 
   useEffect(() => {
