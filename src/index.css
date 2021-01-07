@@ -99,6 +99,11 @@ dialog::backdrop {
   backdrop-filter: blur(0.25rem);
 }
 
+svg {
+  fill: currentcolor;
+  vertical-align: text-bottom;
+}
+
 .flex {
   display: flex;
 }
