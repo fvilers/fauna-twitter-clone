@@ -28,6 +28,12 @@
   color: var(--background-color);
 }
 
+.Button.fab {
+  bottom: 1rem;
+  position: absolute;
+  right: 1rem;
+}
+
 .Button.link {
   background-color: transparent;
   border: 0;

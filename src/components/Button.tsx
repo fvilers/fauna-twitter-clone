@@ -7,12 +7,20 @@ type Props = {
   children: ReactNode;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  position?: "fab";
   type?: "submit" | "reset" | "button";
-  variant?: Variants | "link";
+  variant?: Variants | "fab" | "link";
 };
 
-function Button({ children, disabled, onClick, type, variant }: Props) {
-  const classes = clsx("Button", variant);
+function Button({
+  children,
+  disabled,
+  onClick,
+  position,
+  type,
+  variant,
+}: Props) {
+  const classes = clsx("Button", position, variant);
 
   return (
     <button
