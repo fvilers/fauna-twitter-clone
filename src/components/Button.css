@@ -30,7 +30,7 @@
 
 .Button.fab {
   bottom: 1rem;
-  position: absolute;
+  position: fixed;
   right: 1rem;
 }
 
