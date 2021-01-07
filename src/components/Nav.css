@@ -35,6 +35,10 @@
   color: var(--background-color);
 }
 
+.Nav li Button {
+  margin: 0;
+}
+
 .Nav Button.link {
   color: var(--background-color);
 }

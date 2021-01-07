@@ -15,6 +15,14 @@ function Timeline() {
     return <Message variant="error">{errorMessage}</Message>;
   }
 
+  if (tweets.length === 0) {
+    return (
+      <Message>
+        There's no tweet to display. You should start following some people.
+      </Message>
+    );
+  }
+
   return <TweetList items={tweets} />;
 }
 

@@ -2,6 +2,7 @@ import assert from "assert";
 import React, { useContext, useRef, useState } from "react";
 import Button from "../components/Button";
 import Dialog from "../components/Dialog";
+import Greeting from "../components/Greeting";
 import TweetForm, {
   TweetFormHandles,
   TweetFormValues,
@@ -10,6 +11,7 @@ import AuthContext from "../contexts/AuthContext";
 import TimelineContext from "../contexts/TimelineContext";
 import { composeTweet } from "../db/Tweets";
 import AsyncOperation from "../types/AsyncOperation";
+import CurrentUserProvider from "./CurrentUserProvider";
 
 function ComposeTweet() {
   const [showDialog, setShowDialog] = useState(false);
@@ -56,6 +58,9 @@ function ComposeTweet() {
         </svg>
       </Button>
       <Dialog modal onClose={handleReset} open={showDialog}>
+        <CurrentUserProvider>
+          <Greeting />
+        </CurrentUserProvider>
         <TweetForm
           disabled={busy}
           errorMessage={errorMessage}

@@ -5,7 +5,7 @@ import AuthContext from "../contexts/AuthContext";
 import "./Nav.css";
 
 function Nav() {
-  const { hasSecret } = useContext(AuthContext);
+  const { secret } = useContext(AuthContext);
 
   return (
     <div className="Nav">
@@ -14,7 +14,7 @@ function Nav() {
       </h1>
       <nav>
         <ul>
-          {hasSecret() ? (
+          {secret ? (
             <>
               <li>
                 <SignOut />

@@ -13,7 +13,6 @@ function AuthProvider({ children }: Props) {
     window.localStorage.removeItem(SECRET_KEY);
     setSecret(null);
   };
-  const hasSecret = () => secret !== null;
   const saveSecret = (secret: string) => {
     window.localStorage.setItem(SECRET_KEY, secret);
     setSecret(secret);
@@ -32,9 +31,7 @@ function AuthProvider({ children }: Props) {
   }, []);
 
   return (
-    <AuthContext.Provider
-      value={{ clearSecret, hasSecret, saveSecret, secret }}
-    >
+    <AuthContext.Provider value={{ clearSecret, saveSecret, secret }}>
       {children}
     </AuthContext.Provider>
   );

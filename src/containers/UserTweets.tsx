@@ -41,11 +41,15 @@ function UserTweets({ username }: Props) {
   }, [username]);
 
   if (busy) {
-    return <Loading message="Loading timeline..." />;
+    return <Loading message="Loading tweets..." />;
   }
 
   if (errorMessage) {
     return <Message variant="error">{errorMessage}</Message>;
+  }
+
+  if (tweets.length === 0) {
+    return <Message>This user has not yet started tweeting.</Message>;
   }
 
   return <TweetList items={tweets} />;

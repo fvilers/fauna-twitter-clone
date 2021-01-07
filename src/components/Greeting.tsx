@@ -1,6 +1,7 @@
 import assert from "assert";
 import React, { useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import "./Greeting.css";
 
 // Inspired by https://writing.stackexchange.com/questions/7111/how-do-greetings-vary-with-time-of-day
 function getGreeting(when: Date): string {
@@ -24,14 +25,14 @@ type Props = {
 };
 
 function Greeting({ when = new Date() }: Props) {
-  const { user } = useContext(CurrentUserContext);
   const greeting = getGreeting(when);
+  const { user } = useContext(CurrentUserContext);
 
   assert(user);
 
   return (
-    <div>
-      {greeting}, <strong>{user.username}</strong>
+    <div className="Greeting">
+      {greeting}, <strong>{user.username}</strong> !
     </div>
   );
 }
