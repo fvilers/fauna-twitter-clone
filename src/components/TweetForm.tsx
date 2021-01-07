@@ -25,7 +25,7 @@ export type TweetFormHandles = {
 };
 
 function TweetForm(
-  { disabled, errorMessage, onSubmit }: Props,
+  { disabled, errorMessage, onReset, onSubmit }: Props,
   ref: Ref<TweetFormHandles>
 ) {
   const { handleSubmit, register, errors, setValue, watch } = useForm({
@@ -42,7 +42,7 @@ function TweetForm(
   }));
 
   return (
-    <form className="TweetForm" noValidate onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onReset={onReset} onSubmit={handleSubmit(onSubmit)}>
       <fieldset disabled={disabled}>
         <Textarea
           id="tweet"
@@ -61,6 +61,7 @@ function TweetForm(
         <Button disabled={!canSubmit} type="submit" variant="primary">
           Tweet
         </Button>
+        <Button type="reset">Cancel</Button>
       </div>
     </form>
   );
