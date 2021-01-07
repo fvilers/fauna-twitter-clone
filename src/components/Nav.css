@@ -4,7 +4,6 @@
   color: var(--background-color);
   display: flex;
   justify-content: space-between;
-  margin: -1rem -1rem 1rem -1rem;
   padding: 1rem;
 }
 

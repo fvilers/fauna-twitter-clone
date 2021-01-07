@@ -10,13 +10,13 @@ function SignInPage() {
   const location = useLocation<State>();
 
   return (
-    <div>
+    <main>
       <h1>Sign in</h1>
       <SignIn username={location.state?.username} />
       <footer>
         Don't have an account ? <Link to="/sign-up">Sign up now</Link>
       </footer>
-    </div>
+    </main>
   );
 }
 

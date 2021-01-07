@@ -12,11 +12,13 @@ function UserPage() {
   const { username } = useParams<Params>();
 
   return (
-    <div>
+    <>
       <Nav />
-      <UserTitle username={username} />
-      <UserTweets username={username} />
-    </div>
+      <main>
+        <UserTitle username={username} />
+        <UserTweets username={username} />
+      </main>
+    </>
   );
 }
 

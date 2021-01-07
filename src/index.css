@@ -11,6 +11,14 @@
   --warning-color: #f59e0b;
 }
 
+html,
+body,
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 body {
   background-color: var(--background-color);
   color: var(--foreground-color);
@@ -19,7 +27,8 @@ body {
   margin: 0;
 }
 
-#root {
+main {
+  flex: 1;
   padding: 1rem;
 }
 

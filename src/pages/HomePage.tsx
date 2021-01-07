@@ -10,22 +10,23 @@ function HomePage() {
   const { hasSecret } = useContext(AuthContext);
 
   return (
-    <div>
+    <>
       <Nav />
-      {hasSecret() && (
-        <TimelineProvider>
-          <section>
-            <WelcomeMessage />
-          </section>
-          <section>
-            <h2>Latest Tweets</h2>
-            <Timeline />
-          </section>
-
-          <ComposeTweet />
-        </TimelineProvider>
-      )}
-    </div>
+      <main>
+        {hasSecret() && (
+          <TimelineProvider>
+            <section>
+              <WelcomeMessage />
+            </section>
+            <section>
+              <h2>Latest Tweets</h2>
+              <Timeline />
+            </section>
+            <ComposeTweet />
+          </TimelineProvider>
+        )}
+      </main>
+    </>
   );
 }
 
