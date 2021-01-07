@@ -6,17 +6,27 @@ import { createPortal } from "react-dom";
 type Props = {
   children: ReactNode;
   modal?: boolean;
+  onClose?: () => void;
   open?: boolean;
 };
 
-function Dialog({ children, modal, open }: Props) {
+function Dialog({ children, modal, onClose, open }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
   const container = document.getElementById("dialog-root");
 
   useLayoutEffect(() => {
-    assert(ref.current);
-    dialogPolyfill.registerDialog(ref.current);
-  }, []);
+    const dialog = ref.current;
+
+    assert(dialog);
+    dialogPolyfill.registerDialog(dialog);
+
+    if (onClose !== undefined) {
+      dialog.addEventListener("close", onClose);
+      return () => {
+        dialog.removeEventListener("close", onClose);
+      };
+    }
+  }, [onClose]);
 
   useEffect(() => {
     assert(ref.current);
