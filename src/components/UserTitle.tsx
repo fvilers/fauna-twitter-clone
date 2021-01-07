@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import FollowUser from "../containers/FollowUser";
-import AuthContext from "../contexts/AuthContext";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 import "./UserTitle.css";
 
 type Props = {
@@ -8,12 +8,13 @@ type Props = {
 };
 
 function UserTitle({ username }: Props) {
-  const { hasSecret } = useContext(AuthContext);
+  const { user } = useContext(CurrentUserContext);
+  const showFollowUser = user !== undefined && user.username !== username;
 
   return (
     <div className="UserTitle">
       <h2>@{username}</h2>
-      {hasSecret() && <FollowUser username={username} />}
+      {showFollowUser && <FollowUser username={username} />}
     </div>
   );
 }

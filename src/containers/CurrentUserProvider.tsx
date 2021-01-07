@@ -1,18 +1,22 @@
 import assert from "assert";
-import React, { useContext, useEffect, useState } from "react";
-import Greeting from "../components/Greeting";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
 import AuthContext from "../contexts/AuthContext";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 import { getCurrentUser } from "../db/Users";
 import UserModel from "../models/UserModel";
 import AsyncOperation from "../types/AsyncOperation";
+
+type Props = {
+  children: ReactNode;
+};
 
 type State = AsyncOperation & {
   user?: UserModel;
 };
 
-function WelcomeMessage() {
+function CurrentUserProvider({ children }: Props) {
   const [{ busy, errorMessage, user }, setState] = useState<State>({
     busy: false,
   });
@@ -48,7 +52,11 @@ function WelcomeMessage() {
     return <Message variant="error">{errorMessage}</Message>;
   }
 
-  return <Greeting username={user.username} />;
+  return (
+    <CurrentUserContext.Provider value={{ user }}>
+      {children}
+    </CurrentUserContext.Provider>
+  );
 }
 
-export default WelcomeMessage;
+export default CurrentUserProvider;
