@@ -8,6 +8,7 @@ import AuthContext from "../contexts/AuthContext";
 
 function HomePage() {
   const { hasSecret } = useContext(AuthContext);
+
   return (
     <div>
       <Nav />
@@ -17,12 +18,11 @@ function HomePage() {
             <WelcomeMessage />
           </section>
           <section>
-            <ComposeTweet />
-          </section>
-          <section>
             <h2>Latest Tweets</h2>
             <Timeline />
           </section>
+
+          <ComposeTweet />
         </TimelineProvider>
       )}
     </div>
