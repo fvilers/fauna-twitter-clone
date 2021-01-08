@@ -54,7 +54,7 @@ function TweetForm(
 
       {errorMessage && <Message variant="error">{errorMessage}</Message>}
 
-      <div className="flex right">
+      <div className="flex right buttons">
         {tweet.length > MAX_TWEET_LENGTH / 2 && (
           <TweetCounter length={tweet.length} max={MAX_TWEET_LENGTH} />
         )}
