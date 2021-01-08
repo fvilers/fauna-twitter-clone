@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Nav from "../components/Nav";
 import UserTitle from "../components/UserTitle";
-import CurrentUserProvider from "../containers/CurrentUserProvider";
 import UserTweets from "../containers/UserTweets";
 
 type Params = {
@@ -16,9 +15,7 @@ function UserPage() {
     <>
       <Nav />
       <main>
-        <CurrentUserProvider>
-          <UserTitle username={username} />
-        </CurrentUserProvider>
+        <UserTitle username={username} />
         <UserTweets username={username} />
       </main>
     </>

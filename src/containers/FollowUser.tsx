@@ -39,9 +39,7 @@ function FollowUser({ username }: Props) {
   };
 
   useEffect(() => {
-    assert(secret);
-
-    const loadData = async () => {
+    const loadData = async (secret: string) => {
       try {
         const isFollowing = await getIsFollowing(username, secret);
         setState((s) => ({ ...s, busy: false, isFollowing }));
@@ -55,7 +53,9 @@ function FollowUser({ username }: Props) {
       }
     };
 
-    loadData();
+    if (secret !== null) {
+      loadData(secret);
+    }
   }, [username, secret]);
 
   if (isFollowing === undefined) {

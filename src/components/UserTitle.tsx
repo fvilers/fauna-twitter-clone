@@ -9,7 +9,7 @@ type Props = {
 
 function UserTitle({ username }: Props) {
   const { user } = useContext(CurrentUserContext);
-  const showFollowUser = user !== undefined && user.username !== username;
+  const showFollowUser = user !== null && user.username !== username;
 
   return (
     <div className="UserTitle">

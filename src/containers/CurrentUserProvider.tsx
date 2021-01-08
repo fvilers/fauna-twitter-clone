@@ -1,4 +1,3 @@
-import assert from "assert";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import Message from "../components/Message";
@@ -13,7 +12,7 @@ type Props = {
 };
 
 type State = AsyncOperation & {
-  user?: UserModel;
+  user?: UserModel | null;
 };
 
 function CurrentUserProvider({ children }: Props) {
@@ -23,14 +22,12 @@ function CurrentUserProvider({ children }: Props) {
   const { secret } = useContext(AuthContext);
 
   useEffect(() => {
-    assert(secret);
-
-    const loadData = async () => {
+    const loadData = async (secret: string) => {
       setState((s) => ({ ...s, busy: true, errorMessage: undefined }));
 
       try {
         const user = await getCurrentUser(secret);
-        setState({ busy: false, user });
+        setState((s) => ({ ...s, busy: false, user }));
       } catch (error) {
         console.error(error);
         setState((s) => ({
@@ -41,7 +38,11 @@ function CurrentUserProvider({ children }: Props) {
       }
     };
 
-    loadData();
+    if (secret !== null) {
+      loadData(secret);
+    } else {
+      setState((s) => ({ ...s, busy: false, user: null }));
+    }
   }, [secret]);
 
   if (busy || user === undefined) {

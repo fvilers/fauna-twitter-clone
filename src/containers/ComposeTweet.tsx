@@ -11,7 +11,6 @@ import AuthContext from "../contexts/AuthContext";
 import TimelineContext from "../contexts/TimelineContext";
 import { composeTweet } from "../db/Tweets";
 import AsyncOperation from "../types/AsyncOperation";
-import CurrentUserProvider from "./CurrentUserProvider";
 
 function ComposeTweet() {
   const [showDialog, setShowDialog] = useState(false);
@@ -58,9 +57,7 @@ function ComposeTweet() {
         </svg>
       </Button>
       <Dialog modal onClose={handleReset} open={showDialog}>
-        <CurrentUserProvider>
-          <Greeting />
-        </CurrentUserProvider>
+        <Greeting />
         <TweetForm
           disabled={busy}
           errorMessage={errorMessage}
